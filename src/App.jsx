@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import React from 'react'
+import { useEffect, useState } from 'react'
+import Die from './components/die'
+import helpers from './helpers'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  // 'First Throw' Initialise an Array of 10 dice 
+  // The Array is created in a separate helper function 
+  const [dice, setDice] = useState(helpers.allNewDice)
+
+  //Iterate through the Arrays to generate die components 
+  const listDice = dice.map((die, index) => {
+    return <Die key = {index} value = {die} />
+  })
+
+  //Roll Dice
+  function rollDice() {
+    setDice(helpers.allNewDice())
+  }
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main className="App">
+      <h2 className="game-title">Tenzies Game!</h2>
+      <div className ="dice-container">
+      <Die value={6} className="die"/>
+      {/* list Dice */}
+      {listDice}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+
+      {/* Roll button */}
+      <button type="button"
+      className="roll-button"
+      onClick = {rollDice}>Roll Dice</button>
+
+    </main>
   )
+
 }
 
 export default App
