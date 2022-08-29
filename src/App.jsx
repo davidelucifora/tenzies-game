@@ -12,8 +12,46 @@ function App() {
 
   //Iterate through the Arrays to generate die components 
   const listDice = dice.map((die, index) => {
-    return <Die key = {index} value = {die} />
+
+    return <Die 
+    key = {index} 
+    value = {die.value}
+    isHeld = {die.isHeld}
+    holdDie={holdDie} 
+    id={index}
+    />
   })
+
+  // Hold value of Die when clicked 
+// I click  a dice. I know its value. Its key and whether it's held.
+// First of all, I have to toggle is Held onClick always.
+// But to know which die I'm clicking I need to 
+
+function holdDie(e) {
+  e.stopPropagation()
+  const clickedDiceId = parseInt(e.currentTarget.id)
+  setDice(prevDice => prevDice.map((die) =>  {
+
+    if (die.id == clickedDiceId) {
+      console.log('I clicked the die with key' + die.id + 'and id' + clickedDiceId)
+      return {
+        ...die,
+        isHeld : !die.isHeld
+      }
+      
+    }
+
+    else return {...die}
+    // return {
+    //   ...die,
+    //   isHeld : !die.isHeld
+    // }
+
+
+  }))
+
+  console.log(dice)
+} 
 
   //Roll Dice
   function rollDice() {
@@ -24,7 +62,7 @@ function App() {
     <main className="App">
       <h2 className="game-title">Tenzies Game!</h2>
       <div className ="dice-container">
-      <Die value={6} className="die"/>
+      
       {/* list Dice */}
       {listDice}
       </div>

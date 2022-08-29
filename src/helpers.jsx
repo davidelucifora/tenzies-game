@@ -6,8 +6,13 @@ export default (function helpers() {
     
     const diceArray = []
     
-    for (let i = 0; i < 9; i++) {
-        let randomDie = Math.floor(Math.random() * 6 + 1)
+    for (let i = 0; i < 10; i++) {
+        let randomDie = {
+            id: i,
+            value: Math.floor(Math.random() * 6 + 1),
+            isHeld: false
+        }
+         
         diceArray.push(randomDie)
     }
 
