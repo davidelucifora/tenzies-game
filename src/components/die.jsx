@@ -11,7 +11,7 @@ function Die(props) {
         className={'die'}
         style={styles}
         onClick={props.holdDie}
-        id={props.id}>
+       >
         
             <h4>{props.value}</h4>
         

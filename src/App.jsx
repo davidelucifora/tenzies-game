@@ -5,39 +5,47 @@ import helpers from './helpers'
 import './App.css'
 
 function App() {
-
+  
   // 'First Throw' Initialise an Array of 10 dice 
-  // The Array is created in a separate helper function 
+  // The Array is created in a separate helper function file
   const [dice, setDice] = useState(helpers.allNewDice)
-
+  
   //Iterate through the Arrays to generate die components 
   const listDice = dice.map((die, index) => {
-
+    
     return <Die 
     key = {index} 
     value = {die.value}
     isHeld = {die.isHeld}
-    holdDie={holdDie} 
-    id={index}
+    holdDie={() => holdDie(index)} 
     />
   })
+  
+    //Rolls Dice
+    function rollDice() {
+      setDice(oldDice => oldDice.map(die => {
+        if (die.isHeld) return {...die}
+        else return {
+          ...die,
+          value : Math.floor(Math.random() * 6) + 1} 
+      }))
 
-  // Hold value of Die when clicked 
-// I click  a dice. I know its value. Its key and whether it's held.
-// First of all, I have to toggle is Held onClick always.
-// But to know which die I'm clicking I need to 
+      helpers.checkForWin(dice) && alert('you won')
 
-function holdDie(e) {
-  e.stopPropagation()
-  const clickedDiceId = parseInt(e.currentTarget.id)
-  setDice(prevDice => prevDice.map((die) =>  {
+    }
 
-    if (die.id == clickedDiceId) {
-      console.log('I clicked the die with key' + die.id + 'and id' + clickedDiceId)
-      return {
-        ...die,
-        isHeld : !die.isHeld
-      }
+  
+  //Holds the dice selected
+  function holdDie(index) {
+    
+    const clickedDiceId = index
+    setDice(prevDice => prevDice.map((die) =>  {
+      
+      if (die.id == clickedDiceId) {
+        return {
+          ...die,
+          isHeld : !die.isHeld
+        }
       
     }
 
@@ -50,13 +58,7 @@ function holdDie(e) {
 
   }))
 
-  console.log(dice)
 } 
-
-  //Roll Dice
-  function rollDice() {
-    setDice(helpers.allNewDice())
-  }
 
   return (
     <main className="App">

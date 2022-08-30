@@ -7,6 +7,7 @@ export default (function helpers() {
     const diceArray = []
     
     for (let i = 0; i < 10; i++) {
+
         let randomDie = {
             id: i,
             value: Math.floor(Math.random() * 6 + 1),
@@ -19,6 +20,15 @@ export default (function helpers() {
     return diceArray
 }
 
-return {allNewDice}
+const checkForWin = function(dice) {
+    let counter = 0
+    dice.forEach(die=> {
+        die.isHeld && counter++
+    })
+    console.log(counter)
+    if (counter === 10) return true
+}
+
+return {allNewDice, checkForWin}
 
 })();
