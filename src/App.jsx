@@ -75,7 +75,7 @@ function App() {
       <h2 className="game-title">Tenzies Game!</h2>
       <p className="subtitle">Roll the dice and click the ones you want to keep for the next roll. Once the dice are all the same you win!</p>
       <div className ="dice-container">
-      
+       
       {/* Show confetti if the user wins */}
       {tenzies && <Confetti />}
       
