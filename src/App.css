@@ -16,7 +16,7 @@
 main {
   border-radius:5px;
   box-shadow:4px 4px 10px rgba(0,0,0,0.4);
-  padding:1rem 3rem 3rem;
+  padding:3rem 1rem;
   display:flex;
   flex-flow:column;
   background-color:#FEFEFE;
@@ -27,7 +27,7 @@ main {
 
 .game-title{
   color:#414bff;
-  margin-bottom:2rem;
+  margin-bottom:1rem;
   font-size:2rem;
 
 }
@@ -63,3 +63,9 @@ main {
     background-color:#414bff;
     box-shadow:2px 2px 4px rgba(0,0,0,0.2);
   }
+
+
+.subtitle{
+  max-width:50%;
+  margin-top:0;
+}
